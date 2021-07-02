@@ -10,9 +10,9 @@ const {meters} = require('bedrock-meter');
 // Handlers need to be added before bedrock.start called.
 // Adding empty handlers here since test files are loaded too late.
 bedrock.events.on('bedrock.init', async () => {
-  meters.setHandler({name: 'insert', handler: () => {}});
-  meters.setHandler({name: 'remove', handler: () => {}});
-  meters.setHandler({name: 'use', handler: () => {}});
+  meters.setInsertHandler({handler: () => {}});
+  meters.setRemoveHandler({handler: () => {}});
+  meters.setUseHandler({handler: () => {}});
 });
 
 require('bedrock-test');

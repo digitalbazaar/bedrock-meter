@@ -10,20 +10,17 @@ function _clearTestHandlerCounts() {
   _useHandlerCount = 0;
 }
 function _setupTestHandlers() {
-  meters.setHandler({
-    name: 'insert',
+  meters.setInsertHandler({
     handler: () => {
       _insertHandlerCount++;
     }
   });
-  meters.setHandler({
-    name: 'remove',
+  meters.setRemoveHandler({
     handler: () => {
       _removeHandlerCount++;
     }
   });
-  meters.setHandler({
-    name: 'use',
+  meters.setUseHandler({
     handler: () => {
       _useHandlerCount++;
     }
@@ -49,67 +46,77 @@ describe('meters', () => {
     });
     // empty handler
     const _h = () => {};
-    it('setHandler insert', async () => {
-      meters.setHandler({name: 'insert', handler: _h});
+    it('setInsertHandler', async () => {
+      meters.setInsertHandler({handler: _h});
     });
-    it('setHandler remove', async () => {
-      meters.setHandler({name: 'remove', handler: _h});
+    it('setRemoveHandler', async () => {
+      meters.setRemoveHandler({handler: _h});
     });
-    it('setHandler use', async () => {
-      meters.setHandler({name: 'use', handler: _h});
+    it('setUseHandler', async () => {
+      meters.setUseHandler({handler: _h});
     });
-    it('setHandler unknown', async () => {
+    it('setInsertHandler without function', async () => {
       let err;
       try {
-        meters.setHandler({name: 'bogus', handler: _h});
+        meters.setInsertHandler({handler: null});
       } catch(e) {
         err = e;
       }
       should.exist(err);
-      err.name.should.equal('SetHandlerError');
+      err.name.should.equal('AssertionError');
     });
-    it('setHandler without function', async () => {
+    it('setRemoveHandler without function', async () => {
       let err;
       try {
-        meters.setHandler({name: 'insert', handler: null});
+        meters.setRemoveHandler({handler: null});
       } catch(e) {
         err = e;
       }
       should.exist(err);
-      err.name.should.equal('SetHandlerError');
+      err.name.should.equal('AssertionError');
     });
-    it('setHandler insert twice', async () => {
-      meters.setHandler({name: 'insert', handler: _h});
+    it('setUseHandler without function', async () => {
       let err;
       try {
-        meters.setHandler({name: 'insert', handler: _h});
+        meters.setUseHandler({handler: null});
       } catch(e) {
         err = e;
       }
       should.exist(err);
-      err.name.should.equal('SetHandlerError');
+      err.name.should.equal('AssertionError');
     });
-    it('setHandler remove twice', async () => {
-      meters.setHandler({name: 'remove', handler: _h});
+    it('setInsertHandler twice', async () => {
+      meters.setInsertHandler({handler: _h});
       let err;
       try {
-        meters.setHandler({name: 'remove', handler: _h});
+        meters.setInsertHandler({handler: _h});
       } catch(e) {
         err = e;
       }
       should.exist(err);
-      err.name.should.equal('SetHandlerError');
+      err.name.should.equal('DuplicateError');
     });
-    it('setHandler use twice', async () => {
-      meters.setHandler({name: 'use', handler: _h});
+    it('setRemoveHandler twice', async () => {
+      meters.setRemoveHandler({handler: _h});
       let err;
       try {
-        meters.setHandler({name: 'use', handler: _h});
+        meters.setRemoveHandler({handler: _h});
       } catch(e) {
         err = e;
       }
       should.exist(err);
-      err.name.should.equal('SetHandlerError');
+      err.name.should.equal('DuplicateError');
+    });
+    it('setUseHandler twice', async () => {
+      meters.setUseHandler({handler: _h});
+      let err;
+      try {
+        meters.setUseHandler({handler: _h});
+      } catch(e) {
+        err = e;
+      }
+      should.exist(err);
+      err.name.should.equal('DuplicateError');
     });
   });
 
