@@ -7,12 +7,13 @@ require('bedrock-mongodb');
 
 const {meters} = require('bedrock-meter');
 
-// Handlers need to be added before bedrock.start called.
-// Adding empty handlers here since test files are loaded too late.
 bedrock.events.on('bedrock.init', async () => {
+  /* Handlers need to be added before `bedrock.start` is called. The empty
+  handlers that are added here will be replaced within tests. */
   meters.setInsertHandler({handler: () => {}});
   meters.setRemoveHandler({handler: () => {}});
   meters.setUseHandler({handler: () => {}});
+  console.log('things set');
 });
 
 require('bedrock-test');

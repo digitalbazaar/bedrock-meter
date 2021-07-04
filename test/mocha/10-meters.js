@@ -1,48 +1,16 @@
-const bedrock = require('bedrock');
+/*!
+ * Copyright (c) 2021 Digital Bazaar, Inc. All rights reserved.
+ */
+'use strict';
+
 const {meters} = require('bedrock-meter');
-
-let _insertHandlerCount;
-let _removeHandlerCount;
-let _useHandlerCount;
-function _clearTestHandlerCounts() {
-  _insertHandlerCount = 0;
-  _removeHandlerCount = 0;
-  _useHandlerCount = 0;
-}
-function _setupTestHandlers() {
-  meters.setInsertHandler({
-    handler: () => {
-      _insertHandlerCount++;
-    }
-  });
-  meters.setRemoveHandler({
-    handler: () => {
-      _removeHandlerCount++;
-    }
-  });
-  meters.setUseHandler({
-    handler: () => {
-      _useHandlerCount++;
-    }
-  });
-}
-
-// setup test handlers.
-//
-// meter lib requires these are setup on bedrock.start.
-// if not set the lib will throw an error.
-bedrock.events.on('bedrock.init', async () => {
-  // FIXME: not called.  lib start checks not tested.
-  console.log('METER TEST BEDROCK.INIT');
-  _setupTestHandlers();
-  _clearTestHandlerCounts();
-});
+const {clearHandlers, resetCountHandlers, HANDLER_COUNTS} =
+  require('./helpers');
 
 describe('meters', () => {
   describe('setHandler', () => {
     beforeEach(async () => {
-      // handler checking requires internals manipulation
-      meters._resetHandlers();
+      clearHandlers();
     });
     // empty handler
     const _h = () => {};
@@ -122,15 +90,13 @@ describe('meters', () => {
 
   describe('insert', () => {
     beforeEach(async () => {
-      meters._resetHandlers();
-      _setupTestHandlers();
-      _clearTestHandlerCounts();
+      resetCountHandlers();
     });
     it('insert - basic', async () => {
       const record = await meters.insert();
       should.exist(record);
       // FIXME: check result
-      _insertHandlerCount.should.equal(1);
+      HANDLER_COUNTS.insert.should.equal(1);
     });
   });
 
@@ -148,9 +114,7 @@ describe('meters', () => {
 
   describe('update', () => {
     before(() => {
-      meters._resetHandlers();
-      _setupTestHandlers();
-      _clearTestHandlerCounts();
+      resetCountHandlers();
     });
     it('update - none', async () => {
       // insert - get - update - get
@@ -190,9 +154,7 @@ describe('meters', () => {
 
   describe('remove', () => {
     beforeEach(async () => {
-      meters._resetHandlers();
-      _setupTestHandlers();
-      _clearTestHandlerCounts();
+      resetCountHandlers();
     });
     it('check removed', async () => {
       // insert - get - remove - get
@@ -203,7 +165,7 @@ describe('meters', () => {
       should.exist(_get);
       _get.meter.id.should.equal(_insert.meter.id);
       await meters.remove({meterId: _insert.meter.id});
-      _removeHandlerCount.should.equal(1);
+      HANDLER_COUNTS.remove.should.equal(1);
       // check removed
       let err;
       try {
