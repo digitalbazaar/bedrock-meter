@@ -13,7 +13,6 @@ bedrock.events.on('bedrock.init', async () => {
   meters.setInsertHandler({handler: () => {}});
   meters.setRemoveHandler({handler: () => {}});
   meters.setUseHandler({handler: () => {}});
-  console.log('things set');
 });
 
 require('bedrock-test');
