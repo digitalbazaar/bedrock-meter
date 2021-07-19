@@ -3,127 +3,43 @@
  */
 'use strict';
 
+const {util: {delay}} = require('bedrock');
 const {meters} = require('bedrock-meter');
-const {clearHandlers, resetCountHandlers, HANDLER_COUNTS} =
-  require('./helpers');
+const bnid = require('bnid');
 
 describe('meters', () => {
-  describe('setHandler', () => {
-    beforeEach(async () => {
-      clearHandlers();
-    });
-    // empty handler
-    const _h = () => {};
-    it('setInsertHandler', async () => {
-      meters.setInsertHandler({handler: _h});
-    });
-    it('setRemoveHandler', async () => {
-      meters.setRemoveHandler({handler: _h});
-    });
-    it('setUseHandler', async () => {
-      meters.setUseHandler({handler: _h});
-    });
-    it('setInsertHandler without function', async () => {
-      let err;
-      try {
-        meters.setInsertHandler({handler: null});
-      } catch(e) {
-        err = e;
-      }
-      should.exist(err);
-      err.name.should.equal('AssertionError');
-    });
-    it('setRemoveHandler without function', async () => {
-      let err;
-      try {
-        meters.setRemoveHandler({handler: null});
-      } catch(e) {
-        err = e;
-      }
-      should.exist(err);
-      err.name.should.equal('AssertionError');
-    });
-    it('setUseHandler without function', async () => {
-      let err;
-      try {
-        meters.setUseHandler({handler: null});
-      } catch(e) {
-        err = e;
-      }
-      should.exist(err);
-      err.name.should.equal('AssertionError');
-    });
-    it('setInsertHandler twice', async () => {
-      meters.setInsertHandler({handler: _h});
-      let err;
-      try {
-        meters.setInsertHandler({handler: _h});
-      } catch(e) {
-        err = e;
-      }
-      should.exist(err);
-      err.name.should.equal('DuplicateError');
-    });
-    it('setRemoveHandler twice', async () => {
-      meters.setRemoveHandler({handler: _h});
-      let err;
-      try {
-        meters.setRemoveHandler({handler: _h});
-      } catch(e) {
-        err = e;
-      }
-      should.exist(err);
-      err.name.should.equal('DuplicateError');
-    });
-    it('setUseHandler twice', async () => {
-      meters.setUseHandler({handler: _h});
-      let err;
-      try {
-        meters.setUseHandler({handler: _h});
-      } catch(e) {
-        err = e;
-      }
-      should.exist(err);
-      err.name.should.equal('DuplicateError');
-    });
-  });
-
   describe('insert', () => {
-    beforeEach(async () => {
-      resetCountHandlers();
-    });
-    it('insert - basic', async () => {
-      const record = await meters.insert();
+    it('insert', async () => {
+      const meter = {id: await bnid.generateId()};
+      const record = await meters.insert({meter});
       should.exist(record);
-      // FIXME: check result
-      HANDLER_COUNTS.insert.should.equal(1);
     });
   });
 
   describe('get', () => {
     it('get', async () => {
       // insert - get - check
-      const _insert = await meters.insert();
-      //console.log('MI', _insert);
-      const _get = await meters.get({meterId: _insert.meter.id});
-      //console.log('MG', _get);
+      const meter = {id: await bnid.generateId()};
+      const _insert = await meters.insert({meter});
+      const _get = await meters.get({id: _insert.meter.id});
       should.exist(_get);
       _get.meter.id.should.equal(_insert.meter.id);
     });
   });
 
   describe('update', () => {
-    before(() => {
-      resetCountHandlers();
-    });
     it('update - none', async () => {
       // insert - get - update - get
-      const _insert = await meters.insert();
-      const _get = await meters.get({meterId: _insert.meter.id});
+      const meter = {id: await bnid.generateId()};
+      const _insert = await meters.insert({meter});
+      const _get = await meters.get({id: _insert.meter.id});
       should.exist(_get);
       _get.meter.id.should.equal(_insert.meter.id);
+      // wait to ensure new record time
+      await delay(1);
+      _get.meter.sequence++;
       await meters.update({meter: _get.meter});
-      const _get2 = await meters.get({meterId: _insert.meter.id});
+      const _get2 = await meters.get({id: _insert.meter.id});
       should.exist(_get2);
       _get2.meter.id.should.equal(_insert.meter.id);
       // check updated and meters equal
@@ -132,17 +48,21 @@ describe('meters', () => {
     });
     it('update - controller', async () => {
       // insert - get - update - get
-      const _insert = await meters.insert();
-      const _get = await meters.get({meterId: _insert.meter.id});
+      const meter = {id: await bnid.generateId()};
+      const _insert = await meters.insert({meter});
+      const _get = await meters.get({id: _insert.meter.id});
       should.exist(_get);
       _get.meter.id.should.equal(_insert.meter.id);
       // updated meter
       const meter2 = {
         ..._get.meter,
+        sequence: _get.meter.sequence + 1,
         controller: 'c2'
       };
+      // wait to ensure new record time
+      await delay(1);
       await meters.update({meter: meter2});
-      const _get2 = await meters.get({meterId: _insert.meter.id});
+      const _get2 = await meters.get({id: _insert.meter.id});
       should.exist(_get2);
       _get2.meter.id.should.equal(_insert.meter.id);
       // check updated and meters equal
@@ -153,23 +73,18 @@ describe('meters', () => {
   });
 
   describe('remove', () => {
-    beforeEach(async () => {
-      resetCountHandlers();
-    });
     it('check removed', async () => {
       // insert - get - remove - get
-      const _insert = await meters.insert();
-      //console.log('MI', _insert);
-      const _get = await meters.get({meterId: _insert.meter.id});
-      //console.log('MG', _get);
+      const meter = {id: await bnid.generateId()};
+      const _insert = await meters.insert({meter});
+      const _get = await meters.get({id: _insert.meter.id});
       should.exist(_get);
       _get.meter.id.should.equal(_insert.meter.id);
-      await meters.remove({meterId: _insert.meter.id});
-      HANDLER_COUNTS.remove.should.equal(1);
+      await meters.remove({id: _insert.meter.id});
       // check removed
       let err;
       try {
-        await meters.get({meterId: _insert.meter.id});
+        await meters.get({id: _insert.meter.id});
       } catch(e) {
         err = e;
       }
