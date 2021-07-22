@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 1.0.0 - 2021-xx-xx
+## 1.0.0 - 2021-07-22
 
 ### Added
 - Added core files.
