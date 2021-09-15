@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 1.1.0 - 2021-xx-xx
+## 1.1.0 - 2021-09-14
 
 ### Added
 - Added `config.meter.addMockMeters` which allows for mock meter(s) to be used
