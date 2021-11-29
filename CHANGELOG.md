@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 1.2.0 - TBD
+## 1.2.0 - 2021-11-29
 
 ### Added
 - Added optional `explain` param to get more details about database performance.
