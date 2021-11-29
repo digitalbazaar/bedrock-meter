@@ -7,7 +7,7 @@ const {meters} = require('bedrock-meter');
 const {cleanDB} = require('./helpers.js');
 const bnid = require('bnid');
 
-describe.only('Meters Database Tests', function() {
+describe('Meters Database Tests', function() {
   let meter1;
   describe('Indexes', function() {
     beforeEach(async () => {
