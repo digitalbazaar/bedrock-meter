@@ -14,6 +14,27 @@ describe('meters', () => {
       const record = await meters.insert({meter});
       should.exist(record);
     });
+    it('should throw duplicate error when inserting same meter id again',
+      async () => {
+        const meter = {id: 'zEAU7Z1nZYkscF1TBiYFpig'};
+        // insert meter
+        const record = await meters.insert({meter});
+        should.exist(record);
+
+        let err;
+        let record2;
+        try {
+        // try inserting same meter id again
+          record2 = await meters.insert({meter});
+        } catch(e) {
+          err = e;
+        }
+        should.exist(err);
+        should.not.exist(record2);
+        err.name.should.equal('DuplicateError');
+        err.message.should.equal('Duplicate meter.');
+        err.details.httpStatusCode.should.equal(409);
+      });
   });
 
   describe('get', () => {
@@ -70,6 +91,25 @@ describe('meters', () => {
       _get2.meter.should.not.deep.equal(_get.meter);
       _get2.meter.controller.should.equal('c2');
     });
+    it('should throw error when updating meter that does not exist in database',
+      async () => {
+        const meterNotInDB = 'zH2TzRv5Qs9SsngkYSWuU1x';
+        const meter = {id: meterNotInDB, sequence: 0};
+
+        let err;
+        let res;
+        try {
+          res = await meters.update({meter});
+        } catch(e) {
+          err = e;
+        }
+        should.exist(err);
+        should.not.exist(res);
+        err.name.should.equal('InvalidStateError');
+        err.message.should.equal('Could not update configuration. ' +
+          'Record sequence does not match or meter does not exist.');
+        err.details.httpStatusCode.should.equal(409);
+      });
   });
 
   describe('remove', () => {
