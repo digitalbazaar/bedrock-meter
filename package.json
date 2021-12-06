@@ -25,7 +25,8 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-meter",
   "dependencies": {
     "assert-plus": "^1.0.0",
-    "bnid": "^2.0.0"
+    "bnid": "^2.0.0",
+    "esm": "^3.2.25"
   },
   "peerDependencies": {
     "bedrock": "^4.1.1",
