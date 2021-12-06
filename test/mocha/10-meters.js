@@ -24,7 +24,7 @@ describe('meters', () => {
         let err;
         let record2;
         try {
-        // try inserting same meter id again
+          // try inserting same meter id again
           record2 = await meters.insert({meter});
         } catch(e) {
           err = e;
