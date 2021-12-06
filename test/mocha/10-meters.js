@@ -133,8 +133,69 @@ describe('meters', () => {
     });
   });
 
-  describe.skip('use', () => {
-    it('use', async () => {
+  describe('use', () => {
+    it('should throw error if "meter" param is not passed', async () => {
+      let err;
+      let res;
+      try {
+        res = await meters.use({});
+      } catch(e) {
+        err = e;
+      }
+      should.not.exist(res);
+      should.exist(err);
+      err.name.should.equal('AssertionError');
+      err.message.should.equal('meter (object) is required');
     });
+    it('should throw error if "newUsage" param is not passed', async () => {
+      let err;
+      let res;
+      const meter = {id: 'zEAU7Z1nZYkscF1TBiYFpig'};
+      try {
+        res = await meters.use({meter});
+      } catch(e) {
+        err = e;
+      }
+      should.not.exist(res);
+      should.exist(err);
+      err.name.should.equal('AssertionError');
+      err.message.should.equal('newUsage (object) is required');
+    });
+    it('should throw error if "newUsage.storage" is not a number', async () => {
+      let err;
+      let res;
+      const meter = {id: 'zEAU7Z1nZYkscF1TBiYFpig'};
+      const newUsage = {
+        storage: 'NOT-A-NUMBER'
+      };
+      try {
+        res = await meters.use({meter, newUsage});
+      } catch(e) {
+        err = e;
+      }
+      should.not.exist(res);
+      should.exist(err);
+      err.name.should.equal('AssertionError');
+      err.message.should.equal('newUsage.storage (number) is required');
+    });
+    it('should throw error if "newUsage.operations" is not a number',
+      async () => {
+        let err;
+        let res;
+        const meter = {id: 'zEAU7Z1nZYkscF1TBiYFpig'};
+        const newUsage = {
+          storage: 1,
+          operations: 'NOT-A-NUMBER'
+        };
+        try {
+          res = await meters.use({meter, newUsage});
+        } catch(e) {
+          err = e;
+        }
+        should.not.exist(res);
+        should.exist(err);
+        err.name.should.equal('AssertionError');
+        err.message.should.equal('newUsage.operations (number) is required');
+      });
   });
 });
