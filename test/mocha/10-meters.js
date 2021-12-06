@@ -32,7 +32,6 @@ describe('meters', () => {
         should.exist(err);
         should.not.exist(record2);
         err.name.should.equal('DuplicateError');
-        err.message.should.equal('Duplicate meter.');
         err.details.httpStatusCode.should.equal(409);
       });
   });
@@ -106,8 +105,6 @@ describe('meters', () => {
         should.exist(err);
         should.not.exist(res);
         err.name.should.equal('InvalidStateError');
-        err.message.should.equal('Could not update configuration. ' +
-          'Record sequence does not match or meter does not exist.');
         err.details.httpStatusCode.should.equal(409);
       });
   });
@@ -145,7 +142,6 @@ describe('meters', () => {
       should.not.exist(res);
       should.exist(err);
       err.name.should.equal('AssertionError');
-      err.message.should.equal('meter (object) is required');
     });
     it('should throw error if "newUsage" param is not passed', async () => {
       let err;
@@ -159,7 +155,6 @@ describe('meters', () => {
       should.not.exist(res);
       should.exist(err);
       err.name.should.equal('AssertionError');
-      err.message.should.equal('newUsage (object) is required');
     });
     it('should throw error if "newUsage.storage" is not a number', async () => {
       let err;
@@ -176,7 +171,6 @@ describe('meters', () => {
       should.not.exist(res);
       should.exist(err);
       err.name.should.equal('AssertionError');
-      err.message.should.equal('newUsage.storage (number) is required');
     });
     it('should throw error if "newUsage.operations" is not a number',
       async () => {
@@ -195,7 +189,6 @@ describe('meters', () => {
         should.not.exist(res);
         should.exist(err);
         err.name.should.equal('AssertionError');
-        err.message.should.equal('newUsage.operations (number) is required');
       });
   });
 });
