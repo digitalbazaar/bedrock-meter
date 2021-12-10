@@ -5,6 +5,9 @@
 ### Added
 - Add additional tests.
 
+### Fixed
+- Use a custom esm cache for coverage testing.
+
 ## 1.2.0 - 2021-11-29
 
 ### Added
