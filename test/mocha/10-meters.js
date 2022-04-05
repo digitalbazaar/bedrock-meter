@@ -1,11 +1,13 @@
 /*!
- * Copyright (c) 2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
-'use strict';
-
-const {util: {delay}} = require('bedrock');
-const {meters} = require('bedrock-meter');
+import * as bedrock from '@bedrock/core';
+import {createRequire} from 'module';
+import {meters} from '@bedrock/meter';
+const require = createRequire(import.meta.url);
 const bnid = require('bnid');
+
+const {util: {delay}} = bedrock;
 
 describe('meters', () => {
   describe('insert', () => {

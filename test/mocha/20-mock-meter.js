@@ -1,9 +1,7 @@
 /*!
- * Copyright (c) 2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
-'use strict';
-
-const {meters} = require('bedrock-meter');
+import {meters} from '@bedrock/meter';
 
 describe('add mock meter (config.meter.addMockMeters)', () => {
   describe('get mock meter', () => {

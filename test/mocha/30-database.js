@@ -1,10 +1,10 @@
 /*!
- * Copyright (c) 2021 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
-'use strict';
-
-const {meters} = require('bedrock-meter');
-const {cleanDB} = require('./helpers.js');
+import {meters} from '@bedrock/meter';
+import {cleanDB} from './helpers.js';
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
 const bnid = require('bnid');
 
 describe('Meters Database Tests', function() {
