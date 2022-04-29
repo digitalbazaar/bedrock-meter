@@ -3,7 +3,7 @@
  */
 import {meters} from '@bedrock/meter';
 import {cleanDB} from './helpers.js';
-import {createRequire} from 'module';
+import {createRequire} from 'node:module';
 const require = createRequire(import.meta.url);
 const bnid = require('bnid');
 
