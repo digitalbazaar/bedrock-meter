@@ -1,5 +1,12 @@
 # bedrock-meter ChangeLog
 
+## 3.0.0 - 2022-04-xx
+
+### Changed
+- **BREAKING**: Update peer deps:
+  - `@bedrock/core@6`
+  - `@bedrock/mongodb@10`.
+
 ## 2.0.0 - 2022-04-05
 
 ### Changed
