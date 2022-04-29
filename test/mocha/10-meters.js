@@ -1,13 +1,11 @@
 /*!
  * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
-import * as bedrock from '@bedrock/core';
-import {createRequire} from 'module';
+import {createRequire} from 'node:module';
+import delay from 'delay';
 import {meters} from '@bedrock/meter';
 const require = createRequire(import.meta.url);
 const bnid = require('bnid');
-
-const {util: {delay}} = bedrock;
 
 describe('meters', () => {
   describe('insert', () => {
