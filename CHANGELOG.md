@@ -5,6 +5,7 @@
 ### Changed
 - Update dependencies and remove unused test dependencies.
 - Lint module.
+- Use `package.json` `files` field.
 
 ## 3.0.0 - 2022-04-29
 
