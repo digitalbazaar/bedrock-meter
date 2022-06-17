@@ -1,5 +1,10 @@
 # bedrock-meter ChangeLog
 
+## 3.1.0 - 2022-xx-xx
+
+### Changed
+- Update dependencies and remove unused test dependencies.
+
 ## 3.0.0 - 2022-04-29
 
 ### Changed

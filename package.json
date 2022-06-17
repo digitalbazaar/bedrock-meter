@@ -26,19 +26,19 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-meter",
   "dependencies": {
     "assert-plus": "^1.0.0",
-    "bnid": "^2.0.0"
+    "bnid": "^3.0.0"
   },
   "peerDependencies": {
-    "@bedrock/core": "^6.0.0",
+    "@bedrock/core": "^6.0.1",
     "@bedrock/mongodb": "^10.0.0"
   },
   "directories": {
     "lib": "./lib"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-digitalbazaar": "^2.8.0",
-    "eslint-plugin-jsdoc": "^37.9.7",
+    "eslint": "^8.17.0",
+    "eslint-config-digitalbazaar": "^3.0.0",
+    "eslint-plugin-jsdoc": "^39.3.2",
     "jsdoc-to-markdown": "^7.1.1"
   },
   "engines": {
