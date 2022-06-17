@@ -4,6 +4,7 @@
 
 ### Changed
 - Update dependencies and remove unused test dependencies.
+- Lint module.
 
 ## 3.0.0 - 2022-04-29
 
