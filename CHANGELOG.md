@@ -1,8 +1,9 @@
 # bedrock-meter ChangeLog
 
-## 3.1.0 - 2022-xx-xx
+## 4.0.0 - 2022-xx-xx
 
 ### Changed
+- **BREAKING**: Require Node.js >=16.
 - Update dependencies and remove unused test dependencies.
 - Lint module.
 - Use `package.json` `files` field.
