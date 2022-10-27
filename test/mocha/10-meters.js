@@ -1,16 +1,14 @@
 /*!
  * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
-import {createRequire} from 'node:module';
 import delay from 'delay';
 import {meters} from '@bedrock/meter';
-const require = createRequire(import.meta.url);
-const bnid = require('bnid');
+import {generateId} from 'bnid';
 
 describe('meters', () => {
   describe('insert', () => {
     it('insert', async () => {
-      const meter = {id: await bnid.generateId()};
+      const meter = {id: await generateId()};
       const record = await meters.insert({meter});
       should.exist(record);
     });
@@ -39,7 +37,7 @@ describe('meters', () => {
   describe('get', () => {
     it('get', async () => {
       // insert - get - check
-      const meter = {id: await bnid.generateId()};
+      const meter = {id: await generateId()};
       const _insert = await meters.insert({meter});
       const _get = await meters.get({id: _insert.meter.id});
       should.exist(_get);
@@ -50,7 +48,7 @@ describe('meters', () => {
   describe('update', () => {
     it('update - none', async () => {
       // insert - get - update - get
-      const meter = {id: await bnid.generateId()};
+      const meter = {id: await generateId()};
       const _insert = await meters.insert({meter});
       const _get = await meters.get({id: _insert.meter.id});
       should.exist(_get);
@@ -68,7 +66,7 @@ describe('meters', () => {
     });
     it('update - controller', async () => {
       // insert - get - update - get
-      const meter = {id: await bnid.generateId()};
+      const meter = {id: await generateId()};
       const _insert = await meters.insert({meter});
       const _get = await meters.get({id: _insert.meter.id});
       should.exist(_get);
@@ -112,7 +110,7 @@ describe('meters', () => {
   describe('remove', () => {
     it('check removed', async () => {
       // insert - get - remove - get
-      const meter = {id: await bnid.generateId()};
+      const meter = {id: await generateId()};
       const _insert = await meters.insert({meter});
       const _get = await meters.get({id: _insert.meter.id});
       should.exist(_get);
