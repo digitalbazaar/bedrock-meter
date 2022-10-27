@@ -3,18 +3,15 @@
  */
 import {meters} from '@bedrock/meter';
 import {cleanDB} from './helpers.js';
-import {createRequire} from 'node:module';
-const require = createRequire(import.meta.url);
-const bnid = require('bnid');
+import {generateId} from 'bnid';
 
 describe('Meters Database Tests', function() {
   let meter1;
   describe('Indexes', function() {
     beforeEach(async () => {
       await cleanDB();
-      meter1 = {id: await bnid.generateId()};
-      const meter2 = {id: await bnid.generateId()};
-
+      meter1 = {id: await generateId()};
+      const meter2 = {id: await generateId()};
       // mutliple records are inserted here in order to do proper assertions
       // for 'nReturned', 'totalKeysExamined' and 'totalDocsExamined'.
       await meters.insert({meter: meter1});
