@@ -2,8 +2,8 @@
  * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
 import delay from 'delay';
+import {generateId} from './helpers.js';
 import {meters} from '@bedrock/meter';
-import {generateId} from 'bnid';
 
 describe('meters', () => {
   describe('insert', () => {
@@ -14,7 +14,7 @@ describe('meters', () => {
     });
     it('should throw duplicate error when inserting same meter id again',
       async () => {
-        const meter = {id: 'zEAU7Z1nZYkscF1TBiYFpig'};
+        const meter = {id: 'z19zMxFgrtXrR3RArhogVQ78T'};
         // insert meter
         const record = await meters.insert({meter});
         should.exist(record);
@@ -90,7 +90,7 @@ describe('meters', () => {
     });
     it('should throw error when updating meter that does not exist in database',
       async () => {
-        const meterNotInDB = 'zH2TzRv5Qs9SsngkYSWuU1x';
+        const meterNotInDB = 'z19zKimKrgcq16vgCjfYaExub';
         const meter = {id: meterNotInDB, sequence: 0};
 
         let err;
@@ -144,7 +144,7 @@ describe('meters', () => {
     it('should throw error if "newUsage" param is not passed', async () => {
       let err;
       let res;
-      const meter = {id: 'zEAU7Z1nZYkscF1TBiYFpig'};
+      const meter = {id: 'z19zMxFgrtXrR3RArhogVQ78T'};
       try {
         res = await meters.use({meter});
       } catch(e) {
@@ -157,7 +157,7 @@ describe('meters', () => {
     it('should throw error if "newUsage.storage" is not a number', async () => {
       let err;
       let res;
-      const meter = {id: 'zEAU7Z1nZYkscF1TBiYFpig'};
+      const meter = {id: 'z19zMxFgrtXrR3RArhogVQ78T'};
       const newUsage = {
         storage: 'NOT-A-NUMBER'
       };
@@ -174,7 +174,7 @@ describe('meters', () => {
       async () => {
         let err;
         let res;
-        const meter = {id: 'zEAU7Z1nZYkscF1TBiYFpig'};
+        const meter = {id: 'z19zMxFgrtXrR3RArhogVQ78T'};
         const newUsage = {
           storage: 1,
           operations: 'NOT-A-NUMBER'
