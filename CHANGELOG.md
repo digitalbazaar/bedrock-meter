@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 5.0.0 - 2022-11-dd
+## 5.0.0 - 2022-11-04
 
 ### Changed
 - **BREAKING**: Use multihash (identity hash ID) when encoding
