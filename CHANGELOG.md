@@ -4,7 +4,8 @@
 
 ### Changed
 - **BREAKING**: Use multihash (identity hash ID) when encoding
-  meter IDs to ensure size is encoded / self-describing.
+  meter IDs to ensure size is encoded / self-describing. No existing meters
+  from previous versions will be compatible with this release.
 
 ## 4.0.0 - 2022-06-21
 
