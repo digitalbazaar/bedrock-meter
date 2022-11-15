@@ -1,5 +1,10 @@
 # bedrock-meter ChangeLog
 
+## 5.1.0 - 2022-11-dd
+
+### Changed
+- Improve invalid meter ID errors.
+
 ## 5.0.0 - 2022-11-04
 
 ### Changed
