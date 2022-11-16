@@ -1,6 +1,6 @@
 {
   "name": "@bedrock/meter",
-  "version": "5.1.1",
+  "version": "5.1.2-0",
   "type": "module",
   "description": "Bedrock Meter",
   "main": "./lib/index.js",
