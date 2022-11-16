@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 5.1.1 - 2022-11-dd
+## 5.1.1 - 2022-11-16
 
 ### Fixed
 - Ensure invalid meter IDs are surfaced as not found errors with
