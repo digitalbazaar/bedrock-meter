@@ -1,5 +1,14 @@
 # bedrock-meter ChangeLog
 
+## 6.0.0 -
+
+### Changed
+- **BREAKING**: Use `@bedrock/mongodb: ^11`.
+- **BREAKING**: Change use of results to match Node Mongo Driver 4 API.
+
+### Removed
+- Remove deprecated MongoDB index `background`.
+
 ## 5.1.1 - 2022-11-16
 
 ### Fixed
