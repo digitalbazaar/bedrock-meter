@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 5.2.0 - 2023-07-xx
+## 5.2.0 - 2023-07-17
 
 ### Added
 - Add a private mock meter that can be used for development in private
