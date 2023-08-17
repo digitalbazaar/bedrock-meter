@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 5.2.1 - 2023-08-xx
+## 5.2.1 - 2023-08-17
 
 ### Fixed
 - Change `return` to `continue` when getting a duplicate error adding
