@@ -4,7 +4,8 @@
 
 ### Fixed
 - Change `return` to `continue` when getting a duplicate error adding
-  mock meters.
+  mock meters. Prior to this fix, some of the mock meters may not be
+  properly created.
 
 ## 5.2.0 - 2023-07-17
 
