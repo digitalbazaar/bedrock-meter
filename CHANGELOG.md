@@ -1,5 +1,11 @@
 # bedrock-meter ChangeLog
 
+## 5.2.1 - 2023-08-xx
+
+### Fixed
+- Change `return` to `continue` when getting a duplicate error adding
+  mock meters.
+
 ## 5.2.0 - 2023-07-17
 
 ### Added
