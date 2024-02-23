@@ -1,5 +1,11 @@
 # bedrock-meter ChangeLog
 
+## 5.3.0 - TBD
+
+### Added
+- Add a config variable `meter.initialMeters`. This array may contain one or
+  more meters that will be inserted on startup.
+
 ## 5.2.1 - 2023-08-17
 
 ### Fixed
