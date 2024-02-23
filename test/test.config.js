@@ -17,3 +17,12 @@ config.mongodb.port = 27017;
 config.mongodb.dropCollections = {};
 config.mongodb.dropCollections.onInit = true;
 config.mongodb.dropCollections.collections = [];
+
+config.meter.initialMeters = [
+  {
+    id: 'z1A2E8GAQazt1FTTp8jYJ28Jt',
+    controller: 'did:key:z6MksNZwi2r6Qxjt3MYLrrZ44gs2fauzgv1dk4E372bNVjtc',
+    product: {id: 'urn:uuid:80a82316-e8c2-11eb-9570-10bf48838a29'},
+    serviceId: 'did:key:z6MkwZ7AXrDpuVi5duY2qvVSx1tBkGmVnmRjDvvwzoVnAzC4'
+  }
+];
