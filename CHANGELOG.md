@@ -1,5 +1,11 @@
 # bedrock-meter ChangeLog
 
+## 5.3.1 - 2025-mm-dd
+
+### Fixed
+- Return passed `record` instead of resulting record from mongodb calls to
+  enable using newer mongodb driver.
+
 ## 5.3.0 - 2024-02-24
 
 ### Added
