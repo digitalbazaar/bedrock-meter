@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 5.3.2 - 2025-mm-dd
+## 5.3.2 - 2025-03-04
 
 ### Fixed
 - Do not pass `writeOptions` in database calls.
