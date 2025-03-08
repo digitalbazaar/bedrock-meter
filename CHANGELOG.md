@@ -1,6 +1,6 @@
 # bedrock-meter ChangeLog
 
-## 6.0.0 - 2025-03-xx
+## 6.0.0 - 2025-03-07
 
 ### Changed
 - Update peer dependencies.
