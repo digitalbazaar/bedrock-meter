@@ -1,9 +1,9 @@
 /*!
  * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
-import delay from 'delay';
 import {generateId} from './helpers.js';
 import {meters} from '@bedrock/meter';
+import {setTimeout} from 'node:timers/promises';
 
 describe('meters', () => {
   describe('insert', () => {
@@ -54,7 +54,7 @@ describe('meters', () => {
       should.exist(_get);
       _get.meter.id.should.equal(_insert.meter.id);
       // wait to ensure new record time
-      await delay(1);
+      await setTimeout(1);
       _get.meter.sequence++;
       await meters.update({meter: _get.meter});
       const _get2 = await meters.get({id: _insert.meter.id});
@@ -78,7 +78,7 @@ describe('meters', () => {
         controller: 'c2'
       };
       // wait to ensure new record time
-      await delay(1);
+      await setTimeout(1);
       await meters.update({meter: meter2});
       const _get2 = await meters.get({id: _insert.meter.id});
       should.exist(_get2);
