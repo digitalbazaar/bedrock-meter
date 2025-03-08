@@ -1,8 +1,8 @@
 /*!
  * Copyright (c) 2021-2022 Digital Bazaar, Inc. All rights reserved.
  */
-import {meters} from '@bedrock/meter';
 import {cleanDB, generateId} from './helpers.js';
+import {meters} from '@bedrock/meter';
 
 describe('Meters Database Tests', function() {
   let meter1;
